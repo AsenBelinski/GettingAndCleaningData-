@@ -9,7 +9,7 @@ The first variable - integer, ranging from 1 to 30 - is the subject.ID - it iden
 
 The second variable - activity  - is character string with six activity names (1 WALKING, 2 WALKING_UPSTAIRS,3 WALKING_DOWNSTAIRS,4 SITTING,5 STANDING,6 LAYING) 
 
-All the other variables has been selected if their name contains "mean" or "std" in all three dimentions (X,Y,Z).After that the data has been summarized by taking only the average of the variable grouping by subject.ID and activity.
+All the other variables has been selected if their name contains "mean" or "std" in all three dimentions (X,Y,Z).After that the data has been summarized by taking only the average of the variable grouping by subject.ID and activity. The columns has been renamed by adding the word "Mean" in front to reflect the above summarization.
 
 "tBodyAcc.mean...X"               
 "tBodyAcc.mean...Y" 
@@ -98,4 +98,5 @@ The describes 30 persons taking part in the experiment in 6 activity types - tot
 
 ## Transformations
 All the columns not containing "mean"" or "std"" has been removed from the final result set.
-The data has been summarized by taking only the average of the any variable grouping by subject.ID and activity.
+The data has been summarized by taking only the average of any variable grouping by subject.ID and activity.
+The columns has been renamed by adding the word "Mean" in front to reflect the above summarization.

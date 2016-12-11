@@ -26,9 +26,9 @@ test <- data.frame(test.subject, test.activity, test.measurements)
 # Read the train data, format headings and combine into single df - train
 train.subject <- read.table(file="Samsung_data/train/subject_train.txt")
 names(train.subject) <- "subject.ID"
-train.measurements <- read.table(file="Samsung_data/tain/X_test.txt")
+train.measurements <- read.table(file="Samsung_data/train/X_train.txt")
 names(train.measurements) <- features$V2
-train.activity <- read.table(file="Samsung_data/train/y_test.txt")
+train.activity <- read.table(file="Samsung_data/train/y_train.txt")
 names(train.activity) <- "activity"
 train <- data.frame(train.subject, train.activity, train.measurements)
 
@@ -42,14 +42,15 @@ merged_data <- rbind(test,train)
 
 #   2. Extracts only the measurements on the mean and standard deviation 
 # for each measurement.
-columns <- grep("mean|std|subject.ID|activity",names(merged_data))
+columns <- grep("*mean*|*std*|subject.ID|activity",names(merged_data))
 selected.data <- merged_data[,columns]
 
 
 #   3. Uses descriptive activity names to name the activities in the data set
 for(i in 1:length(activities$V1)) selected.data$activity <- gsub(i,activities$V2[i], selected.data$activity)
 
-
 #   4. Appropriately labels the data set with descriptive variable names.
-
 #   5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+final.data <- selected.data %>% group_by(subject.ID,activity) %>% summarise_each(funs(mean))
+for (i in 3: length(final.data)) names(final.data)[i] <- paste("Mean",names(final.data)[i],sep="_")
+write.table(final.data, file = "./final_data.txt", sep = "\t")
